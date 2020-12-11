@@ -1946,18 +1946,18 @@ tienePaisesConocidos
 tienePistasAspectoCriminal
 	^pistasAspectoCriminal notEmpty.! !
 
-!LibretaDeDetective methodsFor: 'testing' stamp: 'DJVANP 12/7/2020 12:22:29'!
+!LibretaDeDetective methodsFor: 'testing' stamp: 'DJV 12/10/2020 23:25:25'!
 tieneSospechososEnLaLista
 	^ listaDeSospechosos notEmpty.! !
 
 
-!LibretaDeDetective methodsFor: 'initializing' stamp: 'DJVANP 11/29/2020 20:42:40'!
+!LibretaDeDetective methodsFor: 'initializing' stamp: 'DJV 12/10/2020 23:25:25'!
 conPaisesConocidos: unaListaDePaises ySospechosos: unaListaDeSospechosos  
 	
 	paisesConocidos addAll: unaListaDePaises.
 	listaDeSospechosos addAll: unaListaDeSospechosos.! !
 
-!LibretaDeDetective methodsFor: 'initializing' stamp: 'DJVANP 12/5/2020 18:09:18'!
+!LibretaDeDetective methodsFor: 'initializing' stamp: 'DJV 12/10/2020 23:25:25'!
 initialize 
 
 	paisesConocidos _ Set new.
@@ -1970,11 +1970,11 @@ initialize
 cantidadDePaisesConocidos
 	^ paisesConocidos size .! !
 
-!LibretaDeDetective methodsFor: 'accessing' stamp: 'DJVANP 12/7/2020 12:24:40'!
+!LibretaDeDetective methodsFor: 'accessing' stamp: 'DJV 12/10/2020 23:25:25'!
 cantidadDeSospechosos
 	^ listaDeSospechosos size.! !
 
-!LibretaDeDetective methodsFor: 'accessing' stamp: 'DJVANP 11/29/2020 20:41:53'!
+!LibretaDeDetective methodsFor: 'accessing' stamp: 'DJV 12/10/2020 23:25:25'!
 listaDeSospechosos
 	^ listaDeSospechosos.! !
 
@@ -2003,7 +2003,7 @@ agregarPistasDeAspectoCriminal: unaPista
 
 ! !
 
-!LibretaDeDetective methodsFor: 'acciones' stamp: 'DJVANP 12/6/2020 00:10:46'!
+!LibretaDeDetective methodsFor: 'acciones' stamp: 'DJV 12/10/2020 23:25:25'!
 filtrarSospechosos
 	listaDeSospechosos _ listaDeSospechosos select: [:sospechoso | sospechoso cumpleConCaracterisitcas: pistasAspectoCriminal ]! !
 
@@ -2100,7 +2100,7 @@ puedeEmitirOrden: unaPartidaDeCarmenSanDiego
 
 !classDefinition: #Pais category: 'TrabajoFinal-Entrega-Grupo2'!
 Object subclass: #Pais
-	instanceVariableNames: 'nombre tiempoEnMigraciones paisesLimitrofes tieneObjetoDeValor listaDeTestigos'
+	instanceVariableNames: 'nombre tiempoEnMigraciones paisesLimitrofes tieneObjetoDeValor coleccionDeTestigos'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TrabajoFinal-Entrega-Grupo2'!
@@ -2117,18 +2117,18 @@ tieneObjetoDeValor
 tienePaisesLimitrofes
 	^ paisesLimitrofes notEmpty.! !
 
-!Pais methodsFor: 'testing' stamp: 'DJVANP 12/7/2020 12:35:25'!
+!Pais methodsFor: 'testing' stamp: 'DJV 12/10/2020 23:24:13'!
 tieneTestigos
-	^ listaDeTestigos notEmpty.! !
+	^ coleccionDeTestigos notEmpty.! !
 
 
 !Pais methodsFor: 'accessing' stamp: 'DJVANP 12/7/2020 12:33:08'!
 cantidadDePaisesLimitrofes
 	^ paisesLimitrofes size.! !
 
-!Pais methodsFor: 'accessing' stamp: 'DJVANP 11/28/2020 13:46:11'!
+!Pais methodsFor: 'accessing' stamp: 'DJV 12/10/2020 23:24:13'!
 listaDeTestigos
-	^ listaDeTestigos .! !
+	^ coleccionDeTestigos .! !
 
 !Pais methodsFor: 'accessing' stamp: 'DJVANP 11/18/2020 16:37:12'!
 nombre
@@ -2161,12 +2161,12 @@ conNombre: unPais yTiempoDeEsperaEnMigraciones: cantidadDeHoras
 	nombre _ unPais.
 	tiempoEnMigraciones _ cantidadDeHoras.! !
 
-!Pais methodsFor: 'initializing' stamp: 'DJVANP 12/4/2020 17:46:17'!
+!Pais methodsFor: 'initializing' stamp: 'DJV 12/10/2020 23:24:13'!
 initialize 
 
 	paisesLimitrofes _ Set new.
 	tieneObjetoDeValor _ true.
-	listaDeTestigos _ OrderedCollection new.! !
+	coleccionDeTestigos _ OrderedCollection new.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -2225,7 +2225,7 @@ detectiveViajaA: unPais
 
 	detective viajarA: unPais para: self! !
 
-!PartidaCarmenSanDiego methodsFor: 'acciones' stamp: 'DJVANP 12/9/2020 14:45:08'!
+!PartidaCarmenSanDiego methodsFor: 'acciones' stamp: 'DJV 12/10/2020 23:18:56'!
 imprimirDerrotaEn: unStream  
 
 		unStream reset.
@@ -2233,7 +2233,7 @@ imprimirDerrotaEn: unStream
 		unStream newLine.
 		unStream nextPutAll: 'Datos del criminal'.
 		unStream newLine.
-		self ladron listaDeRasgosFisicos do:[:caracteristica | caracteristica escribirEn: unStream. unStream newLine].
+		self ladron coleccionDeRasgosFisicos do:[:caracteristica | caracteristica escribirEn: unStream. unStream newLine].
 		unStream newLine.
 		unStream nextPutAll: 'El detective ser� revocado de su cargo debido a su incompetencia para resolver el caso. El ladron logr� salirse con la suya. Ahora con el dinero va a vivir comodamente en su nueva isla privada'.
 ! !
@@ -2298,7 +2298,7 @@ ganarPartida
 	self imprimirOrdenDeArrestoFirmeEn: stream.
 	'ResultadoDePartida.txt' asFileEntry fileContents: stream contents.! !
 
-!PartidaCarmenSanDiego methodsFor: 'acciones-private' stamp: 'DJVANP 12/9/2020 15:03:15'!
+!PartidaCarmenSanDiego methodsFor: 'acciones-private' stamp: 'DJV 12/10/2020 23:18:56'!
 imprimirOrdenDeArrestoFirmeEn: unStream 
 
 		unStream reset.
@@ -2306,7 +2306,7 @@ imprimirOrdenDeArrestoFirmeEn: unStream
 		unStream newLine.
 		unStream nextPutAll: 'Caracteristicas del criminal atrapado: '.
 		unStream newLine.
-		self ladron listaDeRasgosFisicos do:[:caracteristica | caracteristica escribirEn: unStream. unStream newLine].
+		self ladron coleccionDeRasgosFisicos do:[:caracteristica | caracteristica escribirEn: unStream. unStream newLine].
 		unStream newLine.
 		unStream nextPutAll: 'Excelente trabajo detective, has resuelto un caso dificil. Te espero esta noche para una cena y hablar de su ascenso'.
 		self agregarDatosDePartidaEn: unStream.
@@ -2521,7 +2521,7 @@ tienePistaDeAspecto: unTestigo
 
 !classDefinition: #Sospechoso category: 'TrabajoFinal-Entrega-Grupo2'!
 Object subclass: #Sospechoso
-	instanceVariableNames: 'nombre colorDePelo formaDePelo colorDeOjos tez caracteristicas rutaDeEscape esLadron listaDeRasgosFisicos paisesPorRecorrer proximosPaises'
+	instanceVariableNames: 'nombre colorDePelo formaDePelo colorDeOjos tez caracteristicas rutaDeEscape esLadron coleccionDeRasgosFisicos paisesPorRecorrer proximosPaises'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TrabajoFinal-Entrega-Grupo2'!
@@ -2534,14 +2534,14 @@ actualizarProximoPais
 	proximosPaises removeFirst.
 	proximosPaises addLast: primeroActual.! !
 
-!Sospechoso methodsFor: 'acciones' stamp: 'DJVANP 12/2/2020 16:38:14'!
-crearListasDeRasgosFisicos
+!Sospechoso methodsFor: 'acciones' stamp: 'DJV 12/10/2020 23:20:31'!
+crearColeccionDeRasgosFisicos
 
-	listaDeRasgosFisicos add: nombre.
-	listaDeRasgosFisicos add: colorDePelo.
-	listaDeRasgosFisicos add: formaDePelo.
-	listaDeRasgosFisicos add: colorDeOjos.
-	listaDeRasgosFisicos add: tez! !
+	coleccionDeRasgosFisicos add: nombre.
+	coleccionDeRasgosFisicos add: colorDePelo.
+	coleccionDeRasgosFisicos add: formaDePelo.
+	coleccionDeRasgosFisicos add: colorDeOjos.
+	coleccionDeRasgosFisicos add: tez! !
 
 !Sospechoso methodsFor: 'acciones' stamp: 'DJVANP 12/4/2020 18:17:47'!
 dejarPistaATestigosDe: unPais 
@@ -2556,7 +2556,7 @@ dejarPistasEn: unaColeccionDePaises
 	unaColeccionDePaises do: [:unPais | self dejarPistaATestigosDe: unPais].
 ! !
 
-!Sospechoso methodsFor: 'acciones' stamp: 'DJVANP 12/4/2020 18:26:25'!
+!Sospechoso methodsFor: 'acciones' stamp: 'DJV 12/10/2020 23:18:56'!
 esVistoPor: unTestigo
 
 	| pista1 pista2 |
@@ -2565,13 +2565,13 @@ esVistoPor: unTestigo
 	
 	"unTestigo agregarPistaPais: self proximoPaisDeRuta."
 	
-	pista1 _ self listaDeRasgosFisicos first.
-	self listaDeRasgosFisicos removeFirst.
-	self listaDeRasgosFisicos addLast: pista1.
+	pista1 _ self coleccionDeRasgosFisicos first.
+	self coleccionDeRasgosFisicos removeFirst.
+	self coleccionDeRasgosFisicos addLast: pista1.
 	
-	pista2 _ self listaDeRasgosFisicos first.
-	self listaDeRasgosFisicos removeFirst.
-	self listaDeRasgosFisicos addLast: pista2.
+	pista2 _ self coleccionDeRasgosFisicos first.
+	self coleccionDeRasgosFisicos removeFirst.
+	self coleccionDeRasgosFisicos addLast: pista2.
 	
 	unTestigo agregarPistaDeRutaDe: self proximoPais.
 	unTestigo agregarPistasDeAspecto: pista1.
@@ -2604,9 +2604,13 @@ robarObjetoA: unPais
 	rutaDeEscape add: unPais.! !
 
 
-!Sospechoso methodsFor: 'accessing' stamp: 'DJVANP 12/7/2020 12:43:45'!
+!Sospechoso methodsFor: 'accessing' stamp: 'DJV 12/10/2020 23:18:44'!
 cantidadDeRasgosFisicos
-	 ^ listaDeRasgosFisicos size.! !
+	 ^ coleccionDeRasgosFisicos size.! !
+
+!Sospechoso methodsFor: 'accessing' stamp: 'DJV 12/10/2020 23:18:56'!
+coleccionDeRasgosFisicos
+	 ^ coleccionDeRasgosFisicos.! !
 
 !Sospechoso methodsFor: 'accessing' stamp: 'DJVANP 12/2/2020 15:26:18'!
 colorDeOjos
@@ -2619,10 +2623,6 @@ colorDePelo
 !Sospechoso methodsFor: 'accessing' stamp: 'DJVANP 12/2/2020 15:25:51'!
 formaDePelo
 	^formaDePelo.! !
-
-!Sospechoso methodsFor: 'accessing' stamp: 'DJVANP 12/2/2020 15:43:10'!
-listaDeRasgosFisicos
-	 ^ listaDeRasgosFisicos.! !
 
 !Sospechoso methodsFor: 'accessing' stamp: 'DJVANP 12/2/2020 15:25:28'!
 nombre
@@ -2645,7 +2645,7 @@ tez
 	^tez.! !
 
 
-!Sospechoso methodsFor: 'initializing' stamp: 'DJVANPANP 12/2/2020 16:38:14'!
+!Sospechoso methodsFor: 'initializing' stamp: 'DJV 12/10/2020 23:20:31'!
 conNombre: unNombre colorDePelo: unColorDePelo formaDePelo: unaFormaDePelo colorDeOjos: unColorDeOjos yTez: unaTez 
 	
 	nombre _ unNombre.
@@ -2654,14 +2654,14 @@ conNombre: unNombre colorDePelo: unColorDePelo formaDePelo: unaFormaDePelo color
 	colorDeOjos _ unColorDeOjos.
 	tez _ unaTez.
 	
-	self crearListasDeRasgosFisicos.! !
+	self crearColeccionDeRasgosFisicos.! !
 
-!Sospechoso methodsFor: 'initializing' stamp: 'DJVANP 12/4/2020 18:25:19'!
+!Sospechoso methodsFor: 'initializing' stamp: 'DJV 12/10/2020 23:18:44'!
 initialize 
 
 	rutaDeEscape _ OrderedCollection new.
 	esLadron _ false.
-	listaDeRasgosFisicos _ OrderedCollection new.
+	coleccionDeRasgosFisicos _ OrderedCollection new.
 	proximosPaises _ OrderedCollection new.! !
 
 
@@ -2674,9 +2674,9 @@ cumpleConCaracterisitcas: unaColeccionDeCaracteristicas
 esLadron
 	^ esLadron .! !
 
-!Sospechoso methodsFor: 'testing' stamp: 'DJVANP 12/7/2020 12:46:22'!
+!Sospechoso methodsFor: 'testing' stamp: 'DJV 12/10/2020 23:18:44'!
 tieneRasgosFisicos
-	 ^ listaDeRasgosFisicos notEmpty.! !
+	 ^ coleccionDeRasgosFisicos notEmpty.! !
 
 !Sospechoso methodsFor: 'testing' stamp: 'DJVANP 12/7/2020 12:41:17'!
 tieneRutaDeEscape
